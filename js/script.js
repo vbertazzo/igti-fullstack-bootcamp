@@ -130,7 +130,7 @@ const renderStats = (users) => {
 const renderUsers = (users) => {
   const createCard = ({ name, age, picture }) => {
     return `
-			<figure class="card">
+			<figure class="card" role="listitem">
 				<div class="card-image">
 					<img src="${picture}" alt="${name}'s photo"/>
 				</div>
