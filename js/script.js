@@ -103,12 +103,12 @@ const renderStats = (users) => {
   const statsContainer = document.querySelector('.stats')
 
   if (users === null || users.length === 0) {
-    const statsHTML = '<h2 class="users-header">Nada a ser exibido</h2>'
+    const statsHTML = '<h2 class="stats-header" role="region">Stats</h2>'
     statsContainer.innerHTML = statsHTML
     return
   }
 
-  const numberFormatter = Intl.NumberFormat('pt-br')
+  const numberFormatter = Intl.NumberFormat('en-US')
   const maleCount = users.filter((user) => user.gender === 'male').length
   const femaleCount = users.filter((user) => user.gender === 'female').length
   const ageSum = users.reduce((acc, curr) => acc + curr.age, 0)
@@ -117,11 +117,11 @@ const renderStats = (users) => {
   const formattedAveraveAge = numberFormatter.format(averageAge)
 
   const statsHTML = `
-		<h2 class="stats-header">Estatísticas</h2>
-		<p class="stat">Sexo masculino: ${maleCount}</p>
-		<p class="stat">Sexo feminino: ${femaleCount}</p>
-		<p class="stat">Soma das idades: ${formattedAgeSum} anos</p>
-		<p class="stat">Média das idades: ${formattedAveraveAge} anos</p>
+    <h2 class="stats-header" role="region">Stats</h2>
+		<p class="stat">Male users: ${maleCount}</p>
+		<p class="stat">Female users: ${femaleCount}</p>
+		<p class="stat">Sum of ages: ${formattedAgeSum} years</p>
+		<p class="stat">Average age: ${formattedAveraveAge} years</p>
 	`
 
   statsContainer.innerHTML = statsHTML
@@ -135,7 +135,7 @@ const renderUsers = (users) => {
 					<img src="${picture}" alt="${name}'s photo"/>
 				</div>
 				<div class="card-content">
-					<figcaption>${name}, ${age} anos</figcaption>
+					<figcaption>${name}, ${age} years</figcaption>
 				</div>
 			</figure>
 		`
@@ -145,12 +145,12 @@ const renderUsers = (users) => {
   const usersContainer = document.querySelector('.users-list')
 
   if (users === null || users.length === 0) {
-    usersHeader.textContent = 'Nenhum usuário filtrado'
+    usersHeader.textContent = 'Results will appear here'
     usersContainer.innerHTML = ''
     return
   }
 
-  usersHeader.textContent = `${users.length} pessoa(s) encontrada(s)`
+  usersHeader.textContent = `${users.length} users found`
   let usersHTML = ''
 
   users.forEach((user) => {
