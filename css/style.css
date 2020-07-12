@@ -30,7 +30,11 @@ section {
   padding: 1rem;
 }
 
-.users {
+.users-header {
+  align-self: center;
+}
+
+.users-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;

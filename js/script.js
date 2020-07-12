@@ -131,17 +131,17 @@ const renderUsers = (users) => {
 		`
   }
 
-  const usersContainer = document.querySelector('.users')
+  const usersHeader = document.querySelector('.users-header')
+  const usersContainer = document.querySelector('.users-list')
 
   if (users === null || users.length === 0) {
-    const usersHTML = '<h2 class="users-header">Nenhum usuário filtrado</h2>'
-    usersContainer.innerHTML = usersHTML
+    usersHeader.textContent = 'Nenhum usuário filtrado'
+    usersContainer.innerHTML = ''
     return
   }
 
-  let usersHTML = `
-		<h2 class="users-header">${users.length} pessoa(s) encontrada(s)</h2>
-	`
+  usersHeader.textContent = `${users.length} pessoa(s) encontrada(s)`
+  let usersHTML = ''
 
   users.forEach((user) => {
     usersHTML += createCard(user)
