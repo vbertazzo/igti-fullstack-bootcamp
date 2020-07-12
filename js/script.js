@@ -107,17 +107,20 @@ const renderStats = (users) => {
     return
   }
 
+  const numberFormatter = Intl.NumberFormat('pt-br')
   const maleCount = users.filter((user) => user.gender === 'male').length
   const femaleCount = users.filter((user) => user.gender === 'female').length
   const ageSum = users.reduce((acc, curr) => acc + curr.age, 0)
+  const formattedAgeSum = numberFormatter.format(ageSum)
   const averageAge = (ageSum / users.length).toFixed(2)
+  const formattedAveraveAge = numberFormatter.format(averageAge)
 
   const statsHTML = `
 		<h2 class="stats-header">Estatísticas</h2>
 		<p class="stat">Sexo masculino: ${maleCount}</p>
 		<p class="stat">Sexo feminino: ${femaleCount}</p>
-		<p class="stat">Soma das idades: ${ageSum} anos</p>
-		<p class="stat">Média das idades: ${averageAge} anos</p>
+		<p class="stat">Soma das idades: ${formattedAgeSum} anos</p>
+		<p class="stat">Média das idades: ${formattedAveraveAge} anos</p>
 	`
 
   statsContainer.innerHTML = statsHTML
