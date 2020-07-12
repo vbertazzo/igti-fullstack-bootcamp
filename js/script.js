@@ -8,6 +8,7 @@ window.addEventListener('load', async () => {
 })
 
 const fetchUsersFrom = async (url) => {
+  displayLoading()
   const res = await fetch(url)
   const json = await res.json()
 
@@ -20,6 +21,34 @@ const fetchUsersFrom = async (url) => {
       picture: picture.large,
     }
   })
+
+  displayLoading(false)
+}
+
+const displayLoading = (isLoading = true) => {
+  const loader = document.querySelector('.loader')
+
+  const showLoader = () => {
+    loader.innerHTML = `
+		<div class="preloader-wrapper small active">
+			<div class="spinner-layer spinner-green-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+	`
+  }
+
+  const hideLoader = () => {
+    loader.innerHTML = ''
+  }
+
+  isLoading ? showLoader() : hideLoader()
 }
 
 const setupSearch = () => {
