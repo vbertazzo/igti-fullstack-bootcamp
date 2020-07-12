@@ -3,12 +3,12 @@ let users = []
 window.addEventListener('load', async () => {
   const url =
     'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
-  setupSearch()
   fetchUsersFrom(url)
+  setupSearch()
 })
 
 const fetchUsersFrom = async (url) => {
-  displayLoading()
+  loading()
   const res = await fetch(url)
   const json = await res.json()
 
@@ -24,13 +24,15 @@ const fetchUsersFrom = async (url) => {
     })
     .sort((a, b) => a.name.localeCompare(b.name))
 
-  displayLoading(false)
+  loading(false)
 }
 
-const displayLoading = (isLoading = true) => {
+const loading = (isLoading = true) => {
   const loader = document.querySelector('.loader')
+  const searchInput = document.querySelector('#search-bar')
 
-  const showLoader = () => {
+  const activate = () => {
+    searchInput.disabled = true
     loader.innerHTML = `
 		<div class="preloader-wrapper small active">
 			<div class="spinner-layer spinner-green-only">
@@ -46,11 +48,12 @@ const displayLoading = (isLoading = true) => {
 	`
   }
 
-  const hideLoader = () => {
+  const deactivate = () => {
+    searchInput.disabled = false
     loader.innerHTML = ''
   }
 
-  isLoading ? showLoader() : hideLoader()
+  isLoading ? activate() : deactivate()
 }
 
 const setupSearch = () => {
