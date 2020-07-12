@@ -29,3 +29,7 @@ section {
   border: 1px solid lightgray;
   padding: 1rem;
 }
+
+.stat {
+  font-size: 1.1rem;
+}

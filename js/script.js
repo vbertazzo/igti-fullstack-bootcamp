@@ -20,7 +20,6 @@ const fetchUsersFrom = async (url) => {
       picture: picture.thumbnail,
     }
   })
-  console.log(users)
 }
 
 const setupSearch = () => {
@@ -40,8 +39,13 @@ const handleSearch = (event) => {
     ? searchButton.removeAttribute('disabled')
     : searchButton.setAttribute('disabled', true)
 
+  if (value.length === 0) {
+    render(null)
+  }
+
   if (value.length > 0 || key === 'Enter') {
-    filterUsersByName(value)
+    const result = filterUsersByName(value)
+    render(result)
   }
 }
 
@@ -52,3 +56,35 @@ const filterUsersByName = (name) => {
 
   return result
 }
+
+const render = (results) => {
+  renderStats(results)
+  renderUsers(results)
+}
+
+const renderStats = (users) => {
+  const statsContainer = document.querySelector('.stats')
+
+  if (users === null || users.length === 0) {
+    const statsHTML = '<h2 class="users-header">Nada a ser exibido</h2>'
+    statsContainer.innerHTML = statsHTML
+    return
+  }
+
+  const maleCount = users.filter((user) => user.gender === 'male').length
+  const femaleCount = users.filter((user) => user.gender === 'female').length
+  const ageSum = users.reduce((acc, curr) => acc + curr.age, 0)
+  const averageAge = (ageSum / users.length).toFixed(2)
+
+  const statsHTML = `
+		<h2 class="stats-header">Estatísticas</h2>
+		<p class="stat">Sexo masculino: ${maleCount}</p>
+		<p class="stat">Sexo feminino: ${femaleCount}</p>
+		<p class="stat">Soma das idades: ${ageSum} anos</p>
+		<p class="stat">Média das idades: ${averageAge} anos</p>
+	`
+
+  statsContainer.innerHTML = statsHTML
+}
+
+const renderUsers = () => {}
