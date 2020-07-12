@@ -30,6 +30,21 @@ section {
   padding: 1rem;
 }
 
+.users {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 14rem;
+  margin: 0.6rem;
+}
+
+.stats {
+  min-width: 17rem;
+}
+
 .stat {
   font-size: 1.1rem;
 }

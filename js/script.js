@@ -17,7 +17,7 @@ const fetchUsersFrom = async (url) => {
       name: `${name.first} ${name.last}`,
       age: dob.age,
       gender,
-      picture: picture.thumbnail,
+      picture: picture.large,
     }
   })
 }
@@ -28,6 +28,7 @@ const setupSearch = () => {
   searchBar.addEventListener('keyup', handleSearch)
   searchButton.addEventListener('click', handleSearch)
   searchBar.value = ''
+  searchBar.focus()
 }
 
 const handleSearch = (event) => {
@@ -87,4 +88,35 @@ const renderStats = (users) => {
   statsContainer.innerHTML = statsHTML
 }
 
-const renderUsers = () => {}
+const renderUsers = (users) => {
+  const createCard = ({ name, age, picture }) => {
+    return `
+			<div class="card">
+				<div class="card-image">
+					<img src="${picture}" alt="${name}'s photo"/>
+				</div>
+				<div class="card-content">
+					<p>${name}, ${age} anos</p>
+				</div>
+			</div>
+		`
+  }
+
+  const usersContainer = document.querySelector('.users')
+
+  if (users === null || users.length === 0) {
+    const usersHTML = '<h2 class="users-header">Nenhum usuário filtrado</h2>'
+    usersContainer.innerHTML = usersHTML
+    return
+  }
+
+  let usersHTML = `
+		<h2 class="users-header">${users.length} pessoa(s) encontrada(s)</h2>
+	`
+
+  users.forEach((user) => {
+    usersHTML += createCard(user)
+  })
+
+  usersContainer.innerHTML = usersHTML
+}
