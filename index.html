@@ -5,10 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Desafio - Módulo 1</title>
     <link rel="stylesheet" href="./css/reset.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <link rel="stylesheet" href="./css/style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+      defer
+    ></script>
     <script src="./js/script.js" defer></script>
   </head>
   <body>
-    <h1>Desafio - Módulo 1</h1>
+    <main>
+      <h1>Pesquisa de usuários</h1>
+
+      <div class="search">
+        <div class="input-field search-field">
+          <input type="text" name="search-bar" id="search-bar" />
+          <label for="search-bar">
+            Busca
+          </label>
+        </div>
+        <a class="waves-effect waves-light btn" disabled>
+          buscar
+        </a>
+      </div>
+
+      <article class="search-result">
+        <section class="users">
+          <h2 class="users-header">Nenhum usuário filtrado</h2>
+        </section>
+        <section class="stats">
+          <h2 class="stats-header">Nada a ser exibido</h2>
+        </section>
+      </article>
+    </main>
   </body>
 </html>
