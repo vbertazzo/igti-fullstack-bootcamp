@@ -76,6 +76,7 @@ const handleSearch = (event) => {
 
   if (value.length === 0) {
     render(null)
+    return
   }
 
   if (value.length > 0 || key === 'Enter') {
