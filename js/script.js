@@ -1,6 +1,6 @@
 let users = []
 
-window.addEventListener('load', async () => {
+window.addEventListener('load', () => {
   const url =
     'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
   fetchUsersFrom(url)
@@ -50,6 +50,7 @@ const loading = (isLoading = true) => {
 
   const deactivate = () => {
     searchInput.disabled = false
+    loader.setAttribute('aria-busy', false)
     loader.innerHTML = ''
   }
 
@@ -129,14 +130,14 @@ const renderStats = (users) => {
 const renderUsers = (users) => {
   const createCard = ({ name, age, picture }) => {
     return `
-			<div class="card">
+			<figure class="card">
 				<div class="card-image">
 					<img src="${picture}" alt="${name}'s photo"/>
 				</div>
 				<div class="card-content">
-					<p>${name}, ${age} anos</p>
+					<figcaption>${name}, ${age} anos</figcaption>
 				</div>
-			</div>
+			</figure>
 		`
   }
 

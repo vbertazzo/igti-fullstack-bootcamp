@@ -24,27 +24,31 @@
     <main>
       <h1 class="teal-text text-darken-1">Pesquisa de usuários</h1>
 
-      <div class="search">
+      <div class="search" role="search">
         <div class="input-field search-field">
           <input type="text" name="search-bar" id="search-bar" />
           <label for="search-bar">
-            Busca
+            Nome da pessoa
           </label>
         </div>
-        <a class="waves-effect waves-light btn" id="search-button" disabled>
+        <button
+          class="waves-effect waves-light btn"
+          id="search-button"
+          disabled
+        >
           buscar
-        </a>
+        </button>
       </div>
 
-      <div class="loader"></div>
+      <div class="loader" aria-busy="true"></div>
 
       <article class="search-result row">
         <section class="users teal lighten-5">
           <h2 class="users-header">Nenhum usuário filtrado</h2>
-          <div class="users-list"></div>
+          <div class="users-list" role="region" aria-live="polite"></div>
         </section>
         <section class="stats">
-          <h2 class="stats-header">Nada a ser exibido</h2>
+          <h2 class="stats-header" role="region">Nada a ser exibido</h2>
         </section>
       </article>
     </main>
