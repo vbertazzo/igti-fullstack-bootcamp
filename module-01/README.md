@@ -6,6 +6,10 @@
 
 [IGTI - Bootcamp: Full Stack Development](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
 
+## 🚀 Demo
+
+[User Search](https://vbertazzo.github.io/igti-fullstack-bootcamp/module-01/)
+
 ## 🎯 Objective
 
 Create an application to filter users and show statistics from the defined filter.
