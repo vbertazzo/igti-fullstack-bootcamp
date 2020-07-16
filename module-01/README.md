@@ -4,9 +4,7 @@
 	<img alt="IGTI Fullstack logo" src="https://res.cloudinary.com/voss/image/upload/v1594901380/readme_logos/igti-fullstack.png"/>
 </div>
 
-<div align="center">
-  [IGTI - Bootcamp: Full Stack Development](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
-</div>
+[IGTI - Bootcamp: Full Stack Development](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
 
 ## 🎯 Objective
 
