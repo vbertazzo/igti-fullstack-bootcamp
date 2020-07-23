@@ -1,14 +1,14 @@
 let users = []
 
-window.addEventListener('load', () => {
+const start = () => {
   const url =
     'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
   fetchUsersFrom(url)
   setupSearch()
-})
+}
 
 const fetchUsersFrom = async (url) => {
-  loading()
+  displayLoader()
   const res = await fetch(url)
   const json = await res.json()
 
@@ -24,10 +24,10 @@ const fetchUsersFrom = async (url) => {
     })
     .sort((a, b) => a.name.localeCompare(b.name))
 
-  loading(false)
+  displayLoader(false)
 }
 
-const loading = (isLoading = true) => {
+const displayLoader = (isLoading = true) => {
   const loader = document.querySelector('.loader')
   const searchInput = document.querySelector('#search-bar')
 
@@ -51,7 +51,7 @@ const loading = (isLoading = true) => {
   const deactivate = () => {
     searchInput.disabled = false
     loader.setAttribute('aria-busy', false)
-    loader.innerHTML = ''
+    loader.classList.add('hide')
   }
 
   isLoading ? activate() : deactivate()
@@ -66,37 +66,25 @@ const setupSearch = () => {
   searchBar.focus()
 }
 
-const handleSearch = (event) => {
-  const { key } = event
-  const { value } = document.querySelector('#search-bar')
+const handleSearch = ({ type, key }) => {
   const searchButton = document.querySelector('#search-button')
+  const { value } = document.querySelector('#search-bar')
+  const inputLength = value.length
 
-  value.length > 0
+  inputLength > 0
     ? searchButton.removeAttribute('disabled')
     : searchButton.setAttribute('disabled', true)
 
-  if (value.length === 0) {
-    render(null)
-    return
-  }
-
-  if (value.length > 0 || key === 'Enter') {
+  if (inputLength > 0 && (key === 'Enter' || type === 'click')) {
     const result = filterUsersByName(value)
     render(result)
   }
 }
 
 const filterUsersByName = (name) => {
-  const result = users.filter((user) =>
+  return users.filter((user) =>
     user.name.toLowerCase().includes(name.toLowerCase()),
   )
-
-  return result
-}
-
-const render = (results) => {
-  renderStats(results)
-  renderUsers(results)
 }
 
 const renderStats = (users) => {
@@ -145,7 +133,7 @@ const renderUsers = (users) => {
   const usersContainer = document.querySelector('.users-list')
 
   if (users === null || users.length === 0) {
-    usersHeader.textContent = 'Results will appear here'
+    usersHeader.textContent = 'No users found'
     usersContainer.innerHTML = ''
     return
   }
@@ -159,3 +147,10 @@ const renderUsers = (users) => {
 
   usersContainer.innerHTML = usersHTML
 }
+
+const render = (results) => {
+  renderStats(results)
+  renderUsers(results)
+}
+
+start()
