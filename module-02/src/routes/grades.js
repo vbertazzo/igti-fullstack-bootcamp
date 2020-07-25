@@ -39,10 +39,58 @@ gradesRouter.post('/', async (request, response, next) => {
     logger.info(
       `${request.method} - ${
         request.baseUrl
-      } [201] - Grade created successfully: ${JSON.stringify(newGrade)}`
+      } - [201] - Grade created: ${JSON.stringify(newGrade)}`
     )
 
     response.status(201).json(newGrade)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      error.name = 'FileNotFound'
+    }
+
+    next(error)
+  }
+})
+
+gradesRouter.put('/:id', async (request, response, next) => {
+  const { id } = request.params
+
+  try {
+    const { student, subject, type, value } = request.body
+
+    if (!(student && subject && type && value)) {
+      throw createCustomError('ValidationError', 'Invalid parameters')
+    }
+
+    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+
+    const gradeIndex = gradesData.grades.findIndex(
+      (grade) => grade.id === Number(id)
+    )
+
+    if (gradeIndex === -1) {
+      throw createCustomError('ValidationError', 'Invalid id')
+    }
+
+    gradesData.grades[gradeIndex] = {
+      ...gradesData.grades[gradeIndex],
+      student,
+      subject,
+      type,
+      value,
+    }
+
+    await fs.writeFile('./data/grades.json', JSON.stringify(gradesData))
+
+    logger.info(
+      `${request.method} - ${
+        request.baseUrl
+      } - [200] - Grade updated: ${JSON.stringify(
+        gradesData.grades[gradeIndex]
+      )}`
+    )
+
+    response.status(200).json(gradesData.grades[gradeIndex])
   } catch (error) {
     if (error.code === 'ENOENT') {
       error.name = 'FileNotFound'
