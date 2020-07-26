@@ -38,6 +38,62 @@ gradesRouter.get('/:id', async (request, response, next) => {
   }
 })
 
+gradesRouter.post('/subject', async (request, response, next) => {
+  try {
+    let { student, subject } = request.body
+
+    if (!(student && subject)) {
+      throw createCustomError('ValidationError', 'Invalid parameters')
+    }
+
+    student = student.trim().toLowerCase()
+    subject = subject.trim().toLowerCase()
+
+    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+
+    const studentAndSubjectExists = gradesData.grades.some(
+      (grade) =>
+        grade.student.trim().toLowerCase() === student &&
+        grade.subject.trim().toLowerCase() === subject
+    )
+
+    if (!studentAndSubjectExists) {
+      throw createCustomError(
+        'ValidationError',
+        'Student and/or Subject not found'
+      )
+    }
+
+    if (studentAndSubjectExists) {
+      const subjectGrade = gradesData.grades.reduce((acc, curr) => {
+        if (
+          curr.student.trim().toLowerCase() === student &&
+          curr.subject.trim().toLowerCase() === subject
+        ) {
+          return acc + curr.value
+        }
+        return acc
+      }, 0)
+
+      logger.info(
+        `${request.method} - ${
+          request.originalUrl
+        } - [200] - Total grade for { ${student}, ${subject} } = ${JSON.stringify(
+          subjectGrade
+        )}`
+      )
+
+      response.status(200).json({ grade: subjectGrade })
+    }
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      error.name = 'FileNotFound'
+    }
+
+    next(error)
+  }
+})
+
 gradesRouter.post('/', async (request, response, next) => {
   try {
     const { student, subject, type, value } = request.body
