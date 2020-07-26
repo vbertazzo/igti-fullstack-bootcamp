@@ -189,7 +189,7 @@ gradesRouter.post('/top3', async (request, response, next) => {
         .sort((a, b) => {
           return b.value - a.value
         })
-        .map((grade) => grade.value)
+        .map((grade) => grade.id)
         .slice(0, 3)
 
       logger.info(
