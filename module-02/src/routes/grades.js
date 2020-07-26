@@ -49,7 +49,7 @@ gradesRouter.post('/subject', async (request, response, next) => {
     student = student.trim().toLowerCase()
     subject = subject.trim().toLowerCase()
 
-    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+    const gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
 
     const studentAndSubjectExists = gradesData.grades.some(
       (grade) =>
@@ -105,7 +105,7 @@ gradesRouter.post('/average', async (request, response, next) => {
     type = type.trim().toLowerCase()
     subject = subject.trim().toLowerCase()
 
-    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+    const gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
 
     const typeAndSubjectExists = gradesData.grades.some(
       (grade) =>
@@ -163,7 +163,7 @@ gradesRouter.post('/top3', async (request, response, next) => {
     type = type.trim().toLowerCase()
     subject = subject.trim().toLowerCase()
 
-    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+    const gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
 
     const typeAndSubjectExists = gradesData.grades.some(
       (grade) =>
@@ -301,7 +301,7 @@ gradesRouter.delete('/:id', async (request, response, next) => {
   const { id } = request.params
 
   try {
-    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+    const gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
 
     const numberOfOriginalGrades = gradesData.grades.length
     const removedGrade = gradesData.grades.filter(
