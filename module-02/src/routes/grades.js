@@ -152,6 +152,61 @@ gradesRouter.post('/average', async (request, response, next) => {
   }
 })
 
+gradesRouter.post('/top3', async (request, response, next) => {
+  try {
+    let { subject, type } = request.body
+
+    if (!(type && subject)) {
+      throw createCustomError('ValidationError', 'Invalid parameters')
+    }
+
+    type = type.trim().toLowerCase()
+    subject = subject.trim().toLowerCase()
+
+    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+
+    const typeAndSubjectExists = gradesData.grades.some(
+      (grade) =>
+        grade.type.trim().toLowerCase() === type &&
+        grade.subject.trim().toLowerCase() === subject
+    )
+
+    if (!typeAndSubjectExists) {
+      throw createCustomError(
+        'ValidationError',
+        'Type and/or Subject not found'
+      )
+    }
+
+    if (typeAndSubjectExists) {
+      const topGrades = gradesData.grades
+        .filter((grade) => {
+          return (
+            grade.type.trim().toLowerCase() === type &&
+            grade.subject.trim().toLowerCase() === subject
+          )
+        })
+        .sort((a, b) => {
+          return b.value - a.value
+        })
+        .map((grade) => grade.value)
+        .slice(0, 3)
+
+      logger.info(
+        `${request.method} - ${request.originalUrl} - [200] - Top 3 grades for { ${type}, ${subject} } = ${topGrades}`
+      )
+
+      response.status(200).json({ grades: topGrades })
+    }
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      error.name = 'FileNotFound'
+    }
+
+    next(error)
+  }
+})
+
 gradesRouter.post('/', async (request, response, next) => {
   try {
     const { student, subject, type, value } = request.body
