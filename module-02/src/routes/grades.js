@@ -38,7 +38,7 @@ gradesRouter.post('/', async (request, response, next) => {
 
     logger.info(
       `${request.method} - ${
-        request.baseUrl
+        request.originalUrl
       } - [201] - Grade created: ${JSON.stringify(newGrade)}`
     )
 
@@ -84,13 +84,57 @@ gradesRouter.put('/:id', async (request, response, next) => {
 
     logger.info(
       `${request.method} - ${
-        request.baseUrl
+        request.originalUrl
       } - [200] - Grade updated: ${JSON.stringify(
         gradesData.grades[gradeIndex]
       )}`
     )
 
     response.status(200).json(gradesData.grades[gradeIndex])
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      error.name = 'FileNotFound'
+    }
+
+    next(error)
+  }
+})
+
+gradesRouter.delete('/:id', async (request, response, next) => {
+  const { id } = request.params
+
+  try {
+    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+
+    const numberOfOriginalGrades = gradesData.grades.length
+    const removedGrade = gradesData.grades.filter(
+      (grade) => grade.id === Number(id)
+    )
+    const filteredGrades = gradesData.grades.filter(
+      (grade) => grade.id !== Number(id)
+    )
+
+    const numberOfFilteredGrades = filteredGrades.length
+
+    if (numberOfOriginalGrades === numberOfFilteredGrades) {
+      logger.info(
+        `${request.method} - ${request.originalUrl} - [204] - No grades removed: id (${id}) not found`
+      )
+    }
+
+    if (numberOfOriginalGrades !== numberOfFilteredGrades) {
+      const newGrades = { ...gradesData, grades: filteredGrades }
+
+      await fs.writeFile('./data/grades.json', JSON.stringify(newGrades))
+
+      logger.info(
+        `${request.method} - ${
+          request.originalUrl
+        } - [204] - Grade removed: ${JSON.stringify(removedGrade)}`
+      )
+    }
+
+    response.status(204).end()
   } catch (error) {
     if (error.code === 'ENOENT') {
       error.name = 'FileNotFound'

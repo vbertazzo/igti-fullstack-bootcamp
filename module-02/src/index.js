@@ -28,7 +28,7 @@ const errorHandler = (error, request, response, next) => {
     `${request.method} - ${request.originalUrl} - [${error.statusCode}] - ${error.message}`
   )
 
-  response.status(error.statusCode).send({ error: error.message })
+  return response.status(error.statusCode).send({ error: error.message })
 }
 
 app.use(errorHandler)
