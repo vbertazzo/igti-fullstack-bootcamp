@@ -10,6 +10,34 @@ const createCustomError = (type, message) => {
   return error
 }
 
+gradesRouter.get('/:id', async (request, response, next) => {
+  const { id } = request.params
+
+  try {
+    let gradesData = JSON.parse(await fs.readFile('./data/grades.json'))
+
+    const grade = gradesData.grades.find((grade) => grade.id === Number(id))
+
+    if (!grade) {
+      throw createCustomError('ValidationError', 'Invalid id')
+    }
+
+    logger.info(
+      `${request.method} - ${
+        request.originalUrl
+      } - [200] - Grade displayed: ${JSON.stringify(grade)}`
+    )
+
+    response.status(200).json(grade)
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      error.name = 'FileNotFound'
+    }
+
+    next(error)
+  }
+})
+
 gradesRouter.post('/', async (request, response, next) => {
   try {
     const { student, subject, type, value } = request.body
