@@ -74,7 +74,7 @@ export default function Form({ onChange, data }) {
             InputProps={{
               endAdornment: <InputAdornment position="end">%</InputAdornment>,
             }}
-            helperText="Your estimated annual interest rate"
+            helperText="Your estimated monthly interest rate"
             label="Interest Rate"
             onChange={handleInputChange}
             required
