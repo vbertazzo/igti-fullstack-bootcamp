@@ -9,15 +9,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Installments({ data }) {
+export default function Installments({ data, limit }) {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
       <Grid container justify="center" spacing={3}>
-        {data.map((installment) => (
-          <Installment key={installment.month} details={installment} />
-        ))}
+        {data
+          .filter((installment) => installment.month <= limit)
+          .map((installment) => (
+            <Installment key={installment.month} details={installment} />
+          ))}
       </Grid>
     </div>
   )

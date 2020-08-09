@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Typography, makeStyles } from '@material-ui/core'
 
 import { Form, Installments } from './components'
+import { getInputValidation } from './lib/input-validator'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -25,8 +26,9 @@ export default function App() {
   useEffect(() => {
     let data = []
     let amount = +initialAmount
+    const { maxValue } = getInputValidation('length')
 
-    for (let i = 1; i <= timeSpan; i++) {
+    for (let i = 1; i <= maxValue; i++) {
       const total = amount + amount * (interestRate / 100)
       const difference = total - initialAmount
       const percentage = (difference / initialAmount) * 100
@@ -43,7 +45,7 @@ export default function App() {
     }
 
     setInstallments(data)
-  }, [initialAmount, interestRate, timeSpan])
+  }, [initialAmount, interestRate])
 
   const handleFormChange = (type, value) => {
     const types = {
@@ -63,7 +65,7 @@ export default function App() {
         Compound Interest
       </Typography>
       <Form onChange={handleFormChange} data={data} />
-      <Installments data={installments} />
+      <Installments data={installments} limit={timeSpan} />
     </Container>
   )
 }
