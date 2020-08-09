@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Container,
   FormControl,
   InputAdornment,
   makeStyles,
@@ -12,7 +13,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(6),
+  },
+  input: {
+    '& label.Mui-focused': {
+      color: '#16a085',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#16a085',
+    },
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#16a085',
+      },
+    },
   },
 }))
 
@@ -33,56 +47,61 @@ export default function Form({ onChange, data }) {
   }
 
   return (
-    <form className={classes.form} autoComplete="off">
-      <FormControl>
-        <TextField
-          id="initial-investment"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">R$</InputAdornment>
-            ),
-          }}
-          helperText="Amount of money to invest"
-          label="Initial Investment"
-          onChange={handleInputChange}
-          required
-          type="number"
-          value={initialAmount}
-          variant="outlined"
-        />
-      </FormControl>
-      <FormControl>
-        <TextField
-          id="interest-rate"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">%</InputAdornment>,
-          }}
-          helperText="Your estimated annual interest rate"
-          label="Interest Rate"
-          onChange={handleInputChange}
-          required
-          type="number"
-          value={interestRate}
-          variant="outlined"
-        />
-      </FormControl>
-      <FormControl>
-        <TextField
-          id="length"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">months</InputAdornment>
-            ),
-          }}
-          helperText="Length of time in months"
-          label="Length of Time"
-          onChange={handleInputChange}
-          required
-          type="number"
-          value={timeSpan}
-          variant="outlined"
-        />
-      </FormControl>
-    </form>
+    <Container maxWidth="md">
+      <form className={classes.form} autoComplete="off">
+        <FormControl>
+          <TextField
+            className={classes.input}
+            id="initial-investment"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">R$</InputAdornment>
+              ),
+            }}
+            helperText="Amount of money to invest"
+            label="Initial Investment"
+            onChange={handleInputChange}
+            required
+            type="number"
+            value={initialAmount}
+            variant="outlined"
+          />
+        </FormControl>
+        <FormControl>
+          <TextField
+            className={classes.input}
+            id="interest-rate"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">%</InputAdornment>,
+            }}
+            helperText="Your estimated annual interest rate"
+            label="Interest Rate"
+            onChange={handleInputChange}
+            required
+            type="number"
+            value={interestRate}
+            variant="outlined"
+          />
+        </FormControl>
+        <FormControl>
+          <TextField
+            className={classes.input}
+            id="length"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">months</InputAdornment>
+              ),
+            }}
+            helperText="Length of time in months"
+            label="Length of Time"
+            onChange={handleInputChange}
+            required
+            type="number"
+            value={timeSpan}
+            variant="outlined"
+          />
+        </FormControl>
+      </form>
+    </Container>
   )
 }

@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     marginTop: theme.spacing(4),
     textAlign: 'center',
+    color: '#16a085',
   },
 }))
 
@@ -24,8 +25,6 @@ export default function App() {
   useEffect(() => {
     let data = []
     let amount = +initialAmount
-
-    console.log(amount)
 
     for (let i = 1; i <= timeSpan; i++) {
       const total = amount + amount * (interestRate / 100)
@@ -59,7 +58,7 @@ export default function App() {
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="lg">
       <Typography className={classes.title} component="h1">
         Compound Interest
       </Typography>

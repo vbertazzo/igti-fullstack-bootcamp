@@ -12,7 +12,7 @@ const INPUT_VALIDATOR = [
   {
     type: 'length',
     minValue: 1,
-    maxValue: 1200,
+    maxValue: 50,
   },
 ]
 

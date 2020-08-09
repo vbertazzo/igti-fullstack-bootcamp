@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   Divider,
+  Grid,
   makeStyles,
   Typography,
 } from '@material-ui/core'
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     boxShadow: theme.shadows[3],
-    minWidth: '16rem',
+    height: '100%',
   },
   avatarContainer: {
     display: 'flex',
@@ -68,38 +69,42 @@ export default function Installment({
   }, [difference])
 
   return (
-    <Card className={classes.root} variant="outlined">
-      <div
-        className={`${classes.avatarContainer} ${
-          isProfit ? classes.bgPositive : classes.bgNegative
-        }`}
-      >
-        <Avatar
-          className={`${classes.avatar} ${
-            isProfit ? classes.positive : classes.negative
+    <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Card className={classes.root} variant="outlined">
+        <div
+          className={`${classes.avatarContainer} ${
+            isProfit ? classes.bgPositive : classes.bgNegative
           }`}
         >
-          {isProfit ? <TrendingUp /> : <TrendingDown />}
-        </Avatar>
-      </div>
-      <Divider orientation="vertical" flexItem />
-      <CardContent className={classes.content}>
-        <Typography className={classes.title} component="h2" gutterBottom>
-          {`Month ${month}`}
-        </Typography>
-        <Divider variant="middle" />
-        <Typography
-          className={`${classes.total} ${
-            isProfit ? classes.positive : classes.negative
-          }`}
-        >
-          {formattedTotal}
-        </Typography>
-        <Typography className={isProfit ? classes.positive : classes.negative}>
-          {`${isProfit ? '+' : ''}${formattedDifference}`}
-        </Typography>
-        <Typography>{percentage}%</Typography>
-      </CardContent>
-    </Card>
+          <Avatar
+            className={`${classes.avatar} ${
+              isProfit ? classes.positive : classes.negative
+            }`}
+          >
+            {isProfit ? <TrendingUp /> : <TrendingDown />}
+          </Avatar>
+        </div>
+        <Divider orientation="vertical" flexItem />
+        <CardContent className={classes.content}>
+          <Typography className={classes.title} component="h2" gutterBottom>
+            {`Month ${month}`}
+          </Typography>
+          <Divider variant="middle" />
+          <Typography
+            className={`${classes.total} ${
+              isProfit ? classes.positive : classes.negative
+            }`}
+          >
+            {formattedTotal}
+          </Typography>
+          <Typography
+            className={isProfit ? classes.positive : classes.negative}
+          >
+            {`${isProfit ? '+' : ''}${formattedDifference}`}
+          </Typography>
+          <Typography>{percentage}%</Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   )
 }
