@@ -1,10 +1,12 @@
-<h1 align="center">Module 1 Challenge: User Search</h1>
-
 <div align="center">
 	<img alt="IGTI Fullstack logo" src="https://res.cloudinary.com/voss/image/upload/v1594901380/readme_logos/igti-fullstack.png"/>
 </div>
 
+<h1 align="center">Module 1 Challenge: User Search</h1>
+
 [IGTI - Bootcamp: Full Stack Development](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
+
+---
 
 ## 🚀 Demo
 

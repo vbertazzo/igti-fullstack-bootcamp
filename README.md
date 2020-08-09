@@ -25,11 +25,22 @@ Javascript - ES6 - Async - Node.js, Express.js and Event Loop - HTTP verbs - API
 
 ## 🚀 Projects
 
-### 1. Foundation
+#### 1. Foundation
 
 - User Search - Application to filter users and show statistics from the defined filter.  
   [Repository](https://github.com/vbertazzo/igti-fullstack-bootcamp/tree/master/module-01)  
   [Demo](https://vbertazzo.github.io/igti-fullstack-bootcamp/module-01/)
+
+#### 2. API Development
+
+- Grades Control API - Backend that provides an API that allows user to control student grades.  
+  [Repository](https://github.com/vbertazzo/igti-fullstack-bootcamp/tree/master/module-02)
+
+#### 2. Front-end
+
+- Compound Interest Simulator: Application to simulate the appreciation or depreciation of an investment using compound interest.  
+  [Repository](https://github.com/vbertazzo/igti-fullstack-bootcamp/tree/master/module-03)  
+  [Demo](https://interest-simulator.netlify.app/)
 
 > GitHub [@vbertazzo](https://github.com/vbertazzo) &nbsp;&middot;&nbsp;
 > Twitter [@vtazzo](https://twitter.com/vtazzo)
