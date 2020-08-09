@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Typography, makeStyles } from '@material-ui/core'
 
-import Form from './components/form'
+import { Form, Installments } from './components'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -13,12 +13,38 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function App() {
-  const [initialAmount, setInitialAmount] = useState(1)
+  const [initialAmount, setInitialAmount] = useState(100)
   const [interestRate, setInterestRate] = useState(1)
   const [timeSpan, setTimeSpan] = useState(1)
+  const [installments, setInstallments] = useState([])
 
   const classes = useStyles()
   const data = { initialAmount, interestRate, timeSpan }
+
+  useEffect(() => {
+    let data = []
+    let amount = +initialAmount
+
+    console.log(amount)
+
+    for (let i = 1; i <= timeSpan; i++) {
+      const total = amount + amount * (interestRate / 100)
+      const difference = total - initialAmount
+      const percentage = (difference / initialAmount) * 100
+      data = [
+        ...data,
+        {
+          month: i,
+          total: total,
+          difference: difference,
+          percentage: percentage.toFixed(2),
+        },
+      ]
+      amount = total
+    }
+
+    setInstallments(data)
+  }, [initialAmount, interestRate, timeSpan])
 
   const handleFormChange = (type, value) => {
     const types = {
@@ -38,6 +64,7 @@ export default function App() {
         Compound Interest
       </Typography>
       <Form onChange={handleFormChange} data={data} />
+      <Installments data={installments} />
     </Container>
   )
 }
