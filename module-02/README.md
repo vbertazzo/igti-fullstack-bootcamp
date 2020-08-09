@@ -1,14 +1,16 @@
-<h1 align="center">Module 2 Challenge: Grades Control API</h1>
-
 <div align="center">
 	<img alt="IGTI Fullstack logo" src="https://res.cloudinary.com/voss/image/upload/v1594901380/readme_logos/igti-fullstack.png"/>
 </div>
 
+<h1 align="center">Module 2 Challenge: Grades Control API</h1>
+
 [IGTI - Bootcamp: Full Stack Development](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
+
+---
 
 ## 🎯 Objective
 
-Create a backend application named "grades-control-api" that provides an API that allows user to control grades from students.
+Create a backend application named "grades-control-api" that provides an API that allows user to control student grades.
 
 ## ✔️ Requirements
 
