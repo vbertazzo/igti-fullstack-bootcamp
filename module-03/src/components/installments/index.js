@@ -6,6 +6,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     margin: theme.spacing(8, 0),
+
+    [theme.breakpoints.up('xs')]: {
+      margin: theme.spacing(3, 0),
+    },
   },
 }))
 

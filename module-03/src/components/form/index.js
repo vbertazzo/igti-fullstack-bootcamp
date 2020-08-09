@@ -9,13 +9,30 @@ import {
 import { getInputValidation } from '../../lib/input-validator'
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   form: {
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
     width: '100%',
-    marginTop: theme.spacing(6),
+    margin: theme.spacing(6, 0),
+    [theme.breakpoints.down('sm')]: {
+      width: '60%',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      margin: theme.spacing(4, 0, 0),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '80%',
+    },
   },
   input: {
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(3),
+    },
     '& label.Mui-focused': {
       color: '#16a085',
     },
@@ -47,7 +64,7 @@ export default function Form({ onChange, data }) {
   }
 
   return (
-    <Container maxWidth="md">
+    <Container className={classes.root} maxWidth="md">
       <form className={classes.form} autoComplete="off">
         <FormControl>
           <TextField

@@ -71,7 +71,7 @@ export default function Installment({
   }, [difference])
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={4}>
+    <Grid item xs={12} sm={12} md={6} lg={4}>
       <Card className={classes.root} variant="outlined">
         <div
           className={`${classes.avatarContainer} ${

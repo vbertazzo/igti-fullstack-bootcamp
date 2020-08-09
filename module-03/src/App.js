@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     textAlign: 'center',
     color: '#16a085',
+
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '2rem',
+    },
   },
 }))
 
