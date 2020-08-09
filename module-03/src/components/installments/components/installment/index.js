@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    boxShadow: theme.shadows[3],
+    boxShadow: theme.shadows[2],
     height: '100%',
   },
   avatarContainer: {
@@ -71,7 +71,7 @@ export default function Installment({
   }, [difference])
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3}>
+    <Grid item xs={12} sm={6} md={4} lg={4}>
       <Card className={classes.root} variant="outlined">
         <div
           className={`${classes.avatarContainer} ${
