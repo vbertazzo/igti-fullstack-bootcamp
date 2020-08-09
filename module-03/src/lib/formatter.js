@@ -1,8 +1,17 @@
 const locale = 'pt-BR'
-const options = { style: 'currency', currency: 'BRL' }
-
-function formatCurrency(value) {
-  return new Intl.NumberFormat(locale, options).format(value)
+const currencyOptions = { style: 'currency', currency: 'BRL' }
+const percentageOptions = {
+  style: 'percent',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
 }
 
-export { formatCurrency }
+function formatCurrency(value) {
+  return new Intl.NumberFormat(locale, currencyOptions).format(value)
+}
+
+function formatPercentage(value) {
+  return new Intl.NumberFormat(locale, percentageOptions).format(value)
+}
+
+export { formatCurrency, formatPercentage }

@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import { TrendingUp, TrendingDown } from '@material-ui/icons'
-import { formatCurrency } from '../../../../lib/formatter'
+import { formatCurrency, formatPercentage } from '../../../../lib/formatter'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     '& > :not(:last-child)': {
       margin: theme.spacing(1, 0),
     },
+    paddingLeft: 0,
   },
   title: {
     color: 'text.secondary',
@@ -63,6 +64,7 @@ export default function Installment({
   const classes = useStyles()
   const formattedTotal = formatCurrency(+total)
   const formattedDifference = formatCurrency(+difference)
+  const formattedPercentage = formatPercentage(+percentage)
 
   useEffect(() => {
     setIsProfit(+difference >= 0)
@@ -102,7 +104,7 @@ export default function Installment({
           >
             {`${isProfit ? '+' : ''}${formattedDifference}`}
           </Typography>
-          <Typography>{percentage}%</Typography>
+          <Typography>{formattedPercentage}</Typography>
         </CardContent>
       </Card>
     </Grid>

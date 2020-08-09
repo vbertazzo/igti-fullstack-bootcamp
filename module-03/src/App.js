@@ -31,14 +31,14 @@ export default function App() {
     for (let i = 1; i <= maxValue; i++) {
       const total = amount + amount * (interestRate / 100)
       const difference = total - initialAmount
-      const percentage = (difference / initialAmount) * 100
+      const percentage = difference / initialAmount
       data = [
         ...data,
         {
           month: i,
           total: total,
           difference: difference,
-          percentage: percentage.toFixed(2),
+          percentage: percentage,
         },
       ]
       amount = total
