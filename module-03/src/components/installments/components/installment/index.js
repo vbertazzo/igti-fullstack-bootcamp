@@ -88,7 +88,7 @@ export default function Installment({
         </div>
         <Divider orientation="vertical" flexItem />
         <CardContent className={classes.content}>
-          <Typography className={classes.title} component="h2" gutterBottom>
+          <Typography className={classes.title} component="h3" gutterBottom>
             {`Month ${month}`}
           </Typography>
           <Divider variant="middle" />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Typography, makeStyles } from '@material-ui/core'
 
-import { Form, Installments } from './components'
+import { Form, Installments, Summary } from './components'
 import { getInputValidation } from './lib/input-validator'
 
 const useStyles = makeStyles((theme) => ({
@@ -19,10 +19,17 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function App() {
-  const [initialAmount, setInitialAmount] = useState(100)
-  const [interestRate, setInterestRate] = useState(1)
-  const [timeSpan, setTimeSpan] = useState(1)
-  const [installments, setInstallments] = useState([])
+  const [initialAmount, setInitialAmount] = useState('100')
+  const [interestRate, setInterestRate] = useState('1')
+  const [timeSpan, setTimeSpan] = useState('1')
+  const [installments, setInstallments] = useState([
+    {
+      total: 101,
+      difference: 1,
+      percentage: 0.01,
+      month: 1,
+    },
+  ])
 
   const classes = useStyles()
   const data = { initialAmount, interestRate, timeSpan }
@@ -69,6 +76,7 @@ export default function App() {
         Compound Interest
       </Typography>
       <Form onChange={handleFormChange} data={data} />
+      <Summary data={installments} limit={timeSpan} />
       <Installments data={installments} limit={timeSpan} />
     </Container>
   )
