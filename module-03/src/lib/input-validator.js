@@ -1,7 +1,7 @@
 const INPUT_VALIDATOR = [
   {
     type: 'initial-investment',
-    minValue: 1,
+    minValue: 0,
     maxValue: 1000000,
   },
   {
@@ -11,7 +11,7 @@ const INPUT_VALIDATOR = [
   },
   {
     type: 'length',
-    minValue: 1,
+    minValue: 0,
     maxValue: 50,
   },
 ]
