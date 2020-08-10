@@ -147,7 +147,9 @@ export default function Summary({ data, limit }) {
               }`}
               component="h3"
             >
-              {formatPercentage(installment?.percentage)}
+              {formatPercentage(
+                installment.percentage ? installment.percentage : 0,
+              )}
             </Typography>
           </div>
           <Typography className={classes.regularBottom}>

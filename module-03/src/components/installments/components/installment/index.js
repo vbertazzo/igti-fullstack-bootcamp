@@ -104,7 +104,9 @@ export default function Installment({
           >
             {`${isProfit ? '+' : ''}${formattedDifference}`}
           </Typography>
-          <Typography>{formattedPercentage}</Typography>
+          <Typography>
+            {percentage ? formattedPercentage : formatPercentage(0)}
+          </Typography>
         </CardContent>
       </Card>
     </Grid>

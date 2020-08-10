@@ -47,6 +47,7 @@ export default function App() {
       const total = amount + amount * (interestRate / 100)
       const difference = total - initialAmount
       const percentage = difference / initialAmount
+
       data = [
         ...data,
         {
