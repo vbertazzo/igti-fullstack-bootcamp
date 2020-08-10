@@ -35,6 +35,10 @@ export default function App() {
   const data = { initialAmount, interestRate, timeSpan }
 
   useEffect(() => {
+    if (!initialAmount || !interestRate || !timeSpan) {
+      return
+    }
+
     let data = []
     let amount = +initialAmount
     const { maxValue } = getInputValidation('length')
@@ -56,7 +60,7 @@ export default function App() {
     }
 
     setInstallments(data)
-  }, [initialAmount, interestRate])
+  }, [initialAmount, interestRate, timeSpan])
 
   const handleFormChange = (type, value) => {
     const types = {

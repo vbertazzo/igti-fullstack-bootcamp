@@ -6,7 +6,6 @@ import {
   makeStyles,
   TextField,
 } from '@material-ui/core'
-import { getInputValidation } from '../../lib/input-validator'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,20 +53,15 @@ export default function Form({ onChange, data }) {
   const handleInputChange = ({ target }) => {
     const { id, value } = target
 
-    const { minValue, maxValue } = getInputValidation(id)
-
-    if (value < minValue || value > maxValue) {
-      return
-    }
-
     onChange(id, value)
   }
 
   return (
     <Container className={classes.root} maxWidth="md">
-      <form className={classes.form} autoComplete="off">
+      <form className={classes.form} noValidate autoComplete="off">
         <FormControl>
           <TextField
+            autoFocus
             className={classes.input}
             id="initial-investment"
             InputProps={{

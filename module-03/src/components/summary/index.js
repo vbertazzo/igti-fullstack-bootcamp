@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, makeStyles, Paper, Typography } from '@material-ui/core'
+import {
+  Container,
+  Divider,
+  makeStyles,
+  Paper,
+  Typography,
+} from '@material-ui/core'
 import { formatCurrency, formatPercentage } from '../../lib/formatter'
+import inputIllustration from '../../assets/images/input-illustration.svg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +83,27 @@ const useStyles = makeStyles((theme) => ({
   negative: {
     color: '#c0392b',
   },
+  errorContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  errorContainerImage: {
+    height: '24rem',
+    margin: theme.spacing(4, 0, 0),
+
+    [theme.breakpoints.down('sm')]: {
+      height: '16rem',
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      height: '13rem',
+    },
+  },
+  errorMessage: {
+    fontSize: '1.2rem',
+    margin: theme.spacing(6, 0, 0),
+  },
 }))
 
 export default function Summary({ data, limit }) {
@@ -90,56 +118,74 @@ export default function Summary({ data, limit }) {
   const installments = data.filter((installment) => installment.month <= limit)
   const installment = installments.slice(-1)[0]
 
-  return (
-    <Paper className={classes.root} elevation={0}>
-      <Paper className={classes.summaryLeft} elevation={2}>
-        <Typography className={classes.title} component="h2">
-          In {limit} {+limit === 1 ? 'month' : 'months'}, you will have
-        </Typography>
-        <Divider variant="middle" />
-        <Typography
-          className={`${classes.total} ${
-            isProfit ? classes.positive : classes.negative
-          }`}
-          component="h3"
-        >
-          {formatCurrency(installment.total)}
-        </Typography>
-      </Paper>
-
-      <Paper className={classes.summaryMiddle} elevation={2}>
-        <div className={classes.flexRow}>
-          <Typography className={classes.regular} component="h2">
-            That is
+  if (installment) {
+    return (
+      <Paper className={classes.root} elevation={0}>
+        <Paper className={classes.summaryLeft} elevation={2}>
+          <Typography className={classes.title} component="h2">
+            In {limit} {+limit === 1 ? 'month' : 'months'}, you will have
           </Typography>
+          <Divider variant="middle" />
           <Typography
-            className={`${classes.percentage} ${
+            className={`${classes.total} ${
               isProfit ? classes.positive : classes.negative
             }`}
             component="h3"
           >
-            {formatPercentage(installment.percentage)}
+            {formatCurrency(installment?.total)}
           </Typography>
-        </div>
-        <Typography className={classes.regularBottom}>
-          of your initial investment
-        </Typography>
-      </Paper>
+        </Paper>
 
-      <Paper className={classes.summaryRight} elevation={2}>
-        <Typography className={classes.title} component="h2">
-          And a {isProfit ? 'profit' : 'loss'} of
-        </Typography>
-        <Divider variant="middle" />
-        <Typography
-          className={`${classes.difference} ${
-            isProfit ? classes.positive : classes.negative
-          }`}
-          component="h3"
-        >
-          {formatCurrency(installment.difference)}
-        </Typography>
+        <Paper className={classes.summaryMiddle} elevation={2}>
+          <div className={classes.flexRow}>
+            <Typography className={classes.regular} component="h2">
+              That is
+            </Typography>
+            <Typography
+              className={`${classes.percentage} ${
+                isProfit ? classes.positive : classes.negative
+              }`}
+              component="h3"
+            >
+              {formatPercentage(installment?.percentage)}
+            </Typography>
+          </div>
+          <Typography className={classes.regularBottom}>
+            of your initial investment
+          </Typography>
+        </Paper>
+
+        <Paper className={classes.summaryRight} elevation={2}>
+          <Typography className={classes.title} component="h2">
+            And a {isProfit ? 'profit' : 'loss'} of
+          </Typography>
+          <Divider variant="middle" />
+          <Typography
+            className={`${classes.difference} ${
+              isProfit ? classes.positive : classes.negative
+            }`}
+            component="h3"
+          >
+            {formatCurrency(installment?.difference)}
+          </Typography>
+        </Paper>
       </Paper>
-    </Paper>
+    )
+  }
+
+  return (
+    <Container className={classes.errorContainer} maxWidth="xs">
+      <div className={classes.errorContainer}>
+        <img
+          className={classes.errorContainerImage}
+          src={inputIllustration}
+          alt="Illustration of woman next to input field"
+        />
+      </div>
+
+      <Typography className={classes.errorMessage} component="h2">
+        Ops... Please, make sure all required fields are filled out.
+      </Typography>
+    </Container>
   )
 }
