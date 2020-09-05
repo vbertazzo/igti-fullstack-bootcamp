@@ -36,7 +36,7 @@ Javascript - ES6 - Async - Node.js, Express.js and Event Loop - HTTP verbs - API
 - Grades Control API - Backend that provides an API that allows user to control student grades.  
   [Repository](https://github.com/vbertazzo/igti-fullstack-bootcamp/tree/master/module-02)
 
-#### 2. Front-end
+#### 3. Front-end
 
 - Compound Interest Simulator: Application to simulate the appreciation or depreciation of an investment using compound interest.  
   [Repository](https://github.com/vbertazzo/igti-fullstack-bootcamp/tree/master/module-03)  
